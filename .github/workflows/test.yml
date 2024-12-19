@@ -11,17 +11,7 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: get local github ip
+    - name: do literally everything
       run: ipconfig
-    - name: Setup Server Files
-      run: |
-        mkdir server
-        copy outrun.exe server/
-    - name: Start Server
-      run: |
-        cd server
-        start /b outrun.exe
-        timeout /t 30
-    - name: Run Tests
-     run: |
-       echo "Server is running at: ${{ env.server_ip }}"    
+      run: start /b outrun.exe
+      run: echo "Server is running at: ${{ env.server_ip }}"   
