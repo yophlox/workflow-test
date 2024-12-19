@@ -15,11 +15,12 @@ jobs:
       shell: cmd
       run: |
         ipconfig
-        FOR /F "tokens=2 delims=:" %%a in ('ipconfig ^| find "IPv4"') do set SERVER_IP=%%a
-        echo "server_ip=%SERVER_IP%" >> $GITHUB_ENV
+        FOR /F "tokens=2 delims=:" %%a in ('ipconfig ^| find "IPv4"') do (
+          echo "server_ip=%%a" >> %GITHUB_ENV%
+        )
 
     - name: Start outrun.exe
       shell: cmd
       run: |
-       echo "${{ env.server_ip }}"
-       start /b outrun.exe
+        echo "Using IP: %server_ip%"
+        start /b outrun.exe
