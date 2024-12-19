@@ -7,11 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
     runs-on: windows-latest
     steps:
-    - name: do literally everything
+    - name: Run ipconfig
       run: ipconfig
+
+    - name: Start outrun.exe
       run: start /b outrun.exe
-      run: echo "Server is running at: ${{ env.server_ip }}"   
+
+    - name: Echo server information
+      run: echo "Server is running at: ${{ env.server_ip }}"
