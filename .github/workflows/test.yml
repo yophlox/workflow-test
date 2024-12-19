@@ -24,3 +24,5 @@ jobs:
       run: |
         echo "Using IP: %server_ip%"
         start /b outrun.exe
+        timeout /t 5 /nobreak
+        echo "Server should be running now..."
