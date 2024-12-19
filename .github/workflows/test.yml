@@ -22,4 +22,4 @@ jobs:
       run: start /b outrun.exe
 
     - name: Echo server information
-      run: echo "Server is running at: ${{ env.server_ip }}"
+      run: echo "${{ env.server_ip }}"
