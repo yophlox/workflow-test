@@ -1,28 +1,27 @@
-name: test-server
+name: test
 
-on: 
-push:
-   branches: [ "main" ]
- pull_request:
-   branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
- test:
-   runs-on: windows-latest
-   steps:
-   - uses: actions/checkout@v3
-   
-   - name: Setup Server Files
+
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: get local github ip
+      run: ipconfig
+    - name: Setup Server Files
+      run: |
+        mkdir server
+        copy outrun.exe server/
+    - name: Start Server
+      run: |
+        cd server
+        start /b outrun.exe
+        timeout /t 30
+    - name: Run Tests
      run: |
-       # Copy or extract your server files if needed
-       mkdir server
-       copy outrun.exe server/
-       
-   - name: Start Server
-     run: |
-       cd server
-       start /b outrun.exe
-       
-   - name: Run Tests
-     run: |
-       echo "Server is running at: ${{ env.server_ip }}"
-       # You have about 6 hours maximum to run tests
+       echo "Server is running at: ${{ env.server_ip }}"    
