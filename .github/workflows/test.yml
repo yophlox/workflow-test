@@ -14,15 +14,18 @@ jobs:
       id: ip_step
       shell: cmd
       run: |
-        ipconfig
+        ipconfig /all
         FOR /F "tokens=2 delims=:" %%a in ('ipconfig ^| find "IPv4"') do (
           echo "server_ip=%%a" >> %GITHUB_ENV%
         )
 
-    - name: Start outrun.exe
+    - name: Start outrun.exe and test connectivity
       shell: cmd
       run: |
         echo "Using IP: %server_ip%"
+        netstat -an | find "LISTENING"
         start /b outrun.exe
         timeout /t 5 /nobreak
         echo "Server should be running now..."
+        netstat -an | find "LISTENING"
+        curl -v http://localhost:9001/
