@@ -20,7 +20,6 @@ jobs:
 
     - name: Start outrun.exe
       shell: cmd
-      run: start /b outrun.exe
-
-    - name: Echo server information
-      run: echo "${{ env.server_ip }}"
+      run: |
+       echo "${{ env.server_ip }}"
+       start /b outrun.exe
